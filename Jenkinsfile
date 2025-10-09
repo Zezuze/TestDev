@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: "${GIT_BRANCH}", url: "${GIT_URL}"
+                git branch: "${GIT_BRANCH}", credentialsId: "jenkins-ssh", url: "${GIT_URL}"
             }
         }
 
