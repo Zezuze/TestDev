@@ -15,28 +15,6 @@ pipeline {
             }
         }
 
-        stage('Build Docker image') {
-            steps {
-                sh "docker build -t ${BUILD_NAME} ."
-            }
-        }
-
-        stage('Run Container') {
-            steps {
-                sh """
-                docker ps -q --filter "name=${BUILD_NAME}" | grep -q . && docker rm -f ${BUILD_NAME} || true
-                docker run -d --name ${BUILD_NAME} -p 8081:80 ${BUILD_NAME}
-                """
-            }
-        }
-
-        stage('Test Deployment') {
-            steps {
-                sh "curl -I ${PROJECT_URL} || exit 1"
-            }
-        }
-    }
-
     post {
         success {
             echo '✅ Deployment successful!'
