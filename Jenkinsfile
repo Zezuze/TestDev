@@ -14,6 +14,7 @@ pipeline {
 		    url: "$GIT_URL"
             }
         }
+    }
 
     post {
         success { echo "SUCCESS" }
