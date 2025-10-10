@@ -2,16 +2,17 @@ pipeline {
     agent any
 
     environment {
-        GIT_URL = "git@github.com:Zezuze/TestDev.git"
         GIT_BRANCH = "main"
+	GIT_CREDENTIAL = "jenkins-ssh"
+	GIT_URL = "git@github.com:Zezuze/TestDev.git/"
     }
-
+       
     stages {
         stage('Checkout') {
             steps {
                 git branch: "$GIT_BRANCH",
-		    credentialsId: "jenkins-ssh",
-		    url: "$GIT_URL"
+		    url: "$GIT_URL",
+		    credentialsId: "$GIT_CREDENTIAL"
             }
         }
     }
@@ -21,3 +22,4 @@ pipeline {
         failure { echo "FAILED" }
     }
 }
+
